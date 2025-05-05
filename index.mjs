@@ -148,17 +148,12 @@ function forEach ({ PROCESS }) {
  */
 export default async function killMeNow (filePath, process, command) {
   const lsof = await getLsofArray()
-  const hasOpenFiles = getHasOpenFiles(filePath)
 
-  if (lsof.some(hasOpenFiles)) {
-    const forFilePath = getFilterForFilePath(filePath)
-    const forProcess = getFilterForProcess(process)
-    const forCommand = getFilterForCommand(command)
-
+  if (lsof.some(getHasOpenFiles(filePath))) {
     lsof.flat()
-      .filter(forFilePath)
-      .filter(forProcess)
-      .filter(forCommand)
+      .filter(getFilterForFilePath(filePath))
+      .filter(getFilterForProcess(process))
+      .filter(getFilterForCommand(command))
       .forEach(forEach)
   }
 }

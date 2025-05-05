@@ -21,3 +21,8 @@
 
 *.config.cjs
 *.config.mjs
+
+# Typescript
+tsconfig.json
+jsconfig.json
+

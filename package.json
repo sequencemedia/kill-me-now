@@ -27,6 +27,6 @@
     "husky": "^9.1.7"
   },
   "dependencies": {
-    "@sequencemedia/lsof": "^0.0.2"
+    "@sequencemedia/lsof": "^0.0.3"
   }
 }

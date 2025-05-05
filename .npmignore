@@ -1,0 +1,23 @@
+.DS_Store
+
+.circleci
+.husky
+
+.editorconfig
+.eslintignore
+.eslintrc
+
+.github
+.gitattributes
+.gitignore
+
+.depsrc
+
+# User-defined NPM configuration
+.npmrc
+
+# User-defined NVM configuration
+.nvmrc
+
+*.config.cjs
+*.config.mjs

@@ -1,1 +1,1 @@
-export default function killMeNow (path: string, process?: number, command?: string): Promise<void>
+export default function killMeNow (name: string, pid?: number, cmd?: string): Promise<void>

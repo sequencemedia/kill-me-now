@@ -109,7 +109,7 @@ function killProcess ({ pid }) {
 }
 
 /**
- *  @param {string} name
+ *  @param {string} name Name or File Path
  *  @param {number} [pid] Process ID
  *  @param {string} [cmd] Command
  *  @returns {Promise<void>}

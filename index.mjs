@@ -21,70 +21,38 @@ const error = debug('kill-me-now:error')
 log('`kill-me-now` is awake')
 
 /**
- *  @param {string} filePath
+ *  @param {string} alpha
  *  @returns {(openFile: Record<string, string>) => boolean}
  */
-function getHasOpenFiles (filePath) {
-  info('getHasOpenFiles')
+function getHasName (alpha) {
+  info('getHasName')
 
   /**
    *  @param {Record<string, string>} openFile
    *  @returns {boolean}
    */
-  function hasFilePath ({ 'FILE PATH': FILEPATH }) {
-    info('hasFilePath')
+  return function hasName ({ name: omega }) {
+    info('hasName')
 
     return (
-      FILEPATH.startsWith(filePath)
-    )
-  }
-
-  /**
-   *  @param {Array<Record<string, string>>} openFiles
-   *  @returns {boolean}
-   */
-  return function hasOpenFiles (openFiles) {
-    info('hasOpenFiles')
-
-    return (
-      openFiles.some(hasFilePath)
+      omega.startsWith(alpha)
     )
   }
 }
 
 /**
- *  @param {string} filePath
+ *  @param {number} alpha
  *  @returns {(openFile: Record<string, string>) => boolean}
  */
-function getFilterForFilePath (filePath) {
-  info('getFilterForFilePath')
+function getHasPid (alpha) {
+  info('getHasPid')
 
-  /**
-   *  @param {Record<string, string>} openFile
-   *  @returns {boolean}
-   */
-  return function filterForFilePath ({ 'FILE PATH': FILEPATH }) {
-    info('filterForFilePath')
-
-    return (
-      FILEPATH.startsWith(filePath)
-    )
-  }
-}
-
-/**
- *  @param {number} process
- *  @returns {(openFile: Record<string, string>) => boolean}
- */
-function getFilterForProcess (process) {
-  info('getFilterForProcess')
-
-  if (process) {
-    return function filterForProcess ({ PROCESS }) {
-      info('filterForProcess')
+  if (alpha) {
+    return function hasPid ({ pid: omega }) {
+      info('hasPid')
 
       return (
-        PROCESS !== process
+        omega !== alpha
       )
     }
   }
@@ -95,18 +63,18 @@ function getFilterForProcess (process) {
 }
 
 /**
- *  @param {string} command
+ *  @param {string} alpha
  *  @returns {(openFile: Record<string, string>) => boolean}
  */
-function getFilterForCommand (command) {
-  info('getFilterForCommand')
+function getHasCmd (alpha) {
+  info('getHasCmd')
 
-  if (command) {
-    return function filterForCommand ({ COMMAND }) {
-      info('filterForCommand')
+  if (alpha) {
+    return function hasCmd ({ cmd: omega }) {
+      info('hasCmd')
 
       return (
-        COMMAND === command
+        omega === alpha
       )
     }
   }
@@ -120,15 +88,15 @@ function getFilterForCommand (command) {
  *  @param {Record<string, string>} openFile
  *  @returns {void}
  */
-function forEach ({ PROCESS }) {
-  info('forEach')
+function killProcess ({ pid }) {
+  info('killProcess')
 
   try {
-    log(`Killing process ${PROCESS} ...`)
+    log(`Killing process ${pid} ...`)
 
-    process.kill(PROCESS)
+    process.kill(pid)
 
-    log(`Killing process ${PROCESS} succeeded.`)
+    log(`Killing process ${pid} succeeded.`)
   } catch (e) {
     const {
       code
@@ -136,24 +104,25 @@ function forEach ({ PROCESS }) {
 
     if (code !== 'ESRCH') error(e)
 
-    error(`Killing process ${PROCESS} failed.`)
+    error(`Killing process ${pid} failed.`)
   }
 }
 
 /**
- *  @param {string} filePath
- *  @param {number} [process] Process ID
- *  @param {string} [command] Command
+ *  @param {string} name
+ *  @param {number} [pid] Process ID
+ *  @param {string} [cmd] Command
  *  @returns {Promise<void>}
  */
-export default async function killMeNow (filePath, process, command) {
+export default async function killMeNow (name, pid, cmd) {
   const lsof = await getLsofArray()
+  const hasName = getHasName(name)
 
-  if (lsof.some(getHasOpenFiles(filePath))) {
-    lsof.flat()
-      .filter(getFilterForFilePath(filePath))
-      .filter(getFilterForProcess(process))
-      .filter(getFilterForCommand(command))
-      .forEach(forEach)
+  if (lsof.some(hasName)) {
+    lsof
+      .filter(hasName)
+      .filter(getHasPid(pid))
+      .filter(getHasCmd(cmd))
+      .forEach(killProcess)
   }
 }

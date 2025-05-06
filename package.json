@@ -11,7 +11,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git://github.com/sequencemedia/kill-me-now.git"
+    "url": "git+https://github.com/sequencemedia/kill-me-now.git"
   },
   "scripts": {
     "lint": "eslint .",
@@ -19,7 +19,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@sequencemedia/lsof": "^0.0.3"
+    "@sequencemedia/lsof": "^0.0.4"
   },
   "devDependencies": {
     "@sequencemedia/eslint-config-standard": "^0.2.52",

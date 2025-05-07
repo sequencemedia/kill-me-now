@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 
+/**
+ *  @typedef {{ name: string, pid: number, command: string }} OpenFileType
+ */
+
 import debug from 'debug'
 
 import {
@@ -22,13 +26,13 @@ log('`kill-me-now` is awake')
 
 /**
  *  @param {string} alpha
- *  @returns {(openFile: Record<string, string>) => boolean}
+ *  @returns {(openFile: OpenFileType) => boolean}
  */
 function getHasName (alpha) {
   info('getHasName')
 
   /**
-   *  @param {Record<string, string>} openFile
+   *  @param {OpenFileType} openFile
    *  @returns {boolean}
    */
   return function hasName ({ name: omega }) {
@@ -42,14 +46,14 @@ function getHasName (alpha) {
 
 /**
  *  @param {number} alpha
- *  @returns {(openFile: Record<string, string>) => boolean}
+ *  @returns {(openFile: OpenFileType) => boolean}
  */
-function getHasPid (alpha) {
-  info('getHasPid')
+function getHasProcessId (alpha) {
+  info('getHasProcessId')
 
   if (alpha) {
-    return function hasPid ({ pid: omega }) {
-      info('hasPid')
+    return function hasProcessId ({ pid: omega }) {
+      info('hasProcessId')
 
       return (
         omega !== alpha
@@ -64,14 +68,14 @@ function getHasPid (alpha) {
 
 /**
  *  @param {string} alpha
- *  @returns {(openFile: Record<string, string>) => boolean}
+ *  @returns {(openFile: OpenFileType) => boolean}
  */
-function getHasCmd (alpha) {
-  info('getHasCmd')
+function getHasCommand (alpha) {
+  info('getHasCommand')
 
   if (alpha) {
-    return function hasCmd ({ cmd: omega }) {
-      info('hasCmd')
+    return function hasCommand ({ command: omega }) {
+      info('hasCommand')
 
       return (
         omega === alpha
@@ -85,11 +89,11 @@ function getHasCmd (alpha) {
 }
 
 /**
- *  @param {Record<string, string>} openFile
+ *  @param {{ pid: number }} openFile
  *  @returns {void}
  */
-function killProcess ({ pid }) {
-  info('killProcess')
+function killProcessById ({ pid }) {
+  info('killProcessById')
 
   try {
     log(`Killing process ${pid} ...`)
@@ -111,18 +115,18 @@ function killProcess ({ pid }) {
 /**
  *  @param {string} name Name or File Path
  *  @param {number} [pid] Process ID
- *  @param {string} [cmd] Command
+ *  @param {string} [command] Command
  *  @returns {Promise<void>}
  */
-export default async function killMeNow (name, pid, cmd) {
+export default async function killMeNow (name, pid, command) {
   const lsof = await getLsofArray()
   const hasName = getHasName(name)
 
   if (lsof.some(hasName)) {
     lsof
       .filter(hasName)
-      .filter(getHasPid(pid))
-      .filter(getHasCmd(cmd))
-      .forEach(killProcess)
+      .filter(getHasProcessId(pid))
+      .filter(getHasCommand(command))
+      .forEach(killProcessById)
   }
 }

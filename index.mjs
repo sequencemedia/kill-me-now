@@ -4,19 +4,11 @@
  *  @typedef {{ name: string, pid: number, command: string }} OpenFileType
  */
 
-import debug from 'debug'
-
 import {
   getLsofArray
 } from '@sequencemedia/lsof'
 
-const {
-  env: {
-    DEBUG = 'kill-me-now,kill-me-now:error'
-  }
-} = process
-
-if (DEBUG) debug.enable(DEBUG)
+import debug from './debug.mjs'
 
 const log = debug('kill-me-now')
 const info = debug('kill-me-now:info')

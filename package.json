@@ -19,7 +19,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@sequencemedia/lsof": "^0.0.15"
+    "@sequencemedia/lsof": "^0.0.16"
   },
   "devDependencies": {
     "@sequencemedia/eslint-config-standard": "^0.2.57",

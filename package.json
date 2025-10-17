@@ -19,13 +19,13 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@sequencemedia/lsof": "^0.0.90"
+    "@sequencemedia/lsof": "^0.0.91"
   },
   "devDependencies": {
     "@sequencemedia/eslint-config-standard": "^0.2.92",
     "@sequencemedia/eslint-config-typescript": "^0.1.159",
     "@types/debug": "^4.1.12",
-    "@types/node": "^24.7.2",
+    "@types/node": "^24.8.1",
     "eslint": "^9.37.0",
     "globals": "^16.4.0",
     "husky": "^9.1.7"

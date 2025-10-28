@@ -22,7 +22,7 @@
     "@sequencemedia/lsof": "^0.0.99"
   },
   "devDependencies": {
-    "@sequencemedia/eslint-config-standard": "^0.2.96",
+    "@sequencemedia/eslint-config-standard": "^0.2.97",
     "@sequencemedia/eslint-config-typescript": "^0.1.166",
     "@types/debug": "^4.1.12",
     "@types/node": "^24.9.1",

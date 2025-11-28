@@ -22,10 +22,10 @@
     "@sequencemedia/lsof": "^0.0.111"
   },
   "devDependencies": {
-    "@sequencemedia/eslint-config-standard": "^0.2.103",
-    "@sequencemedia/eslint-config-typescript": "^0.1.177",
+    "@sequencemedia/eslint-config-standard": "^0.2.107",
+    "@sequencemedia/eslint-config-typescript": "^0.1.182",
     "@types/debug": "^4.1.12",
-    "@types/node": "^24.10.0",
+    "@types/node": "^24.10.1",
     "eslint": "9.38.0",
     "globals": "^16.5.0",
     "husky": "^9.1.7"

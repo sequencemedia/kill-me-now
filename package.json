@@ -25,7 +25,7 @@
     "@sequencemedia/eslint-config-standard": "^0.2.107",
     "@sequencemedia/eslint-config-typescript": "^0.1.182",
     "@types/debug": "^4.1.12",
-    "@types/node": "^25.0.5",
+    "@types/node": "^25.0.9",
     "eslint": "9.38.0",
     "globals": "^17.0.0",
     "husky": "^9.1.7"

@@ -19,11 +19,11 @@
     "prepare": "node husky.mjs"
   },
   "dependencies": {
-    "@sequencemedia/lsof": "^0.0.136"
+    "@sequencemedia/lsof": "^0.0.137"
   },
   "devDependencies": {
-    "@sequencemedia/eslint-config-standard": "^0.2.125",
-    "@sequencemedia/eslint-config-typescript": "^0.1.217",
+    "@sequencemedia/eslint-config-standard": "^0.2.126",
+    "@sequencemedia/eslint-config-typescript": "^0.1.218",
     "@types/debug": "^4.1.13",
     "@types/node": "^26.6.3",
     "eslint": "9.38.0",

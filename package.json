@@ -1,6 +1,6 @@
 {
   "name": "kill-me-now",
-  "version": "0.0.179",
+  "version": "0.0.180",
   "main": "./index.mjs",
   "type": "module",
   "author": {
